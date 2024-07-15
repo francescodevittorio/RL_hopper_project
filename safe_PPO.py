@@ -1,16 +1,16 @@
-"""
-This script trains a safe PPO policy in the to ensure safety during initial real-world trajectory collection. 
-The policy is trained with adjusted reward weights to prioritize the robot's safety, primarily focusing on maintaining the robot's balance 
-and stability over achieving high speeds. The linked environment is 'custom_hopper_safe.py'.
-This safe policy will later be used as the initial policy in the SimOpt with GANs algorithm.
-"""
-
 import gym
 import torch.nn as nn
 from stable_baselines3 import PPO
 from stable_baselines3.common.callbacks import BaseCallback, EvalCallback
 from env.custom_hopper_safe import *
 import wandb
+
+"""
+This script trains a safe PPO policy in the to ensure safety during initial real-world trajectory collection. 
+The policy is trained with adjusted reward weights to prioritize the robot's safety, primarily focusing on maintaining the robot's balance 
+and stability over achieving high speeds. The linked environment is 'custom_hopper_safe.py'.
+This safe policy will later be used as the initial policy in the SimOpt with GANs algorithm.
+"""
 
 # Definition of the best hyperparameters
 best_hyperparams = {
@@ -86,4 +86,3 @@ model.save("safe_model")
 # End the wandb run
 wandb.finish()
 
-wandb.finish()
